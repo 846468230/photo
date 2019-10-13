@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HomePage</title>
+  <meta name="description"
+    content="A photography-inspired website layout with an expanding stack slider and a background image tilt effect" />
+  <meta name="keywords"
+    content="photography, template, layout, effect, expand, image stack, animation, flickity, tilt" />
+  <meta name="author" content="Codrops" />
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles-merged.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+</head>
+
+<body>
+  <div class="hero">
+    <div class="hero__back hero__back--static"></div>
+    <div class="hero__back hero__back--mover"></div>
+    <div class="hero__front"></div>
+  </div>
+
+  <div class="_container" style="color:white">
+
+    <header class="codrops-header">
+      <div class="codrops-links">
+        <a class="codrops-icon codrops-icon--drop" href="/" title="Back to the article"><span>主页</span></a>
+        <a class="codrops-icon codrops-icon--next" href="/" title="Previous Demo"><span></span></a>
+      </div>
+      <h1 class="codrops-title">Eric <span>HomePage</span></h1>
+      <nav class="menu">
+        <a class="menu__item menu__item--current" href="#"><span>Home</span></a>
+        <a class="menu__item" href="{% url 'index' %}""><span>Photograph</span></a>
+        <a class=" menu__item" href="{% url 'about' %}"><span>About</span></a>
+
+      </nav>
+    </header>
+
+
+
+    <div class="probootstrap-section" style="background-color:rgba(33, 33, 33, 1);margin-top: 510px;color: white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 mb80 text-center probootstrap-animate fadeInUp probootstrap-animated">
+            <h2>{{ author.info.name }}</h2>
+            <p>{{ author.info.content }}</p>
+          </div>
+        </div>
+        {% for de in author.desc %}
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="row probootstrap-lg-service probootstrap-animate fadeInUp probootstrap-animated"
+          data-animate-effect="fadeIn">
+          <div class="col-md-3">
+            <div class="icon">
+              <i class="icon-sun"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h2 class="mt0">{{ de.name }}</h2>
+            <p>{{ de.content }}</p>
+          </div>
+          
+          
+        </div>
+        {% else %}
+        <div class="row probootstrap-lg-service probootstrap-animate fadeInUp probootstrap-animated"
+          data-animate-effect="fadeIn">
+          <div class="col-md-3 col-md-push-9">
+            <div class="icon"><i class="icon-spinner"></i></div>
+          </div>
+          <div class="col-md-9 col-md-pull-3">
+            <h2 class="mt0">{{ de.name }}</h2>
+            <p>{{ de.content }}</p>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+      </div>
+      <div style="text-align: center;margin: -5% 0 5% 0;">
+        <a href="#"
+          style="font-size:20px;color:white;border-color: white;border-radius: 15%;border:solid 1px;padding: 10px">DownLoad</a>
+
+      </div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 mb40">
+            <h2>About the author</h2>
+            <p>Erqian,Cai</p>
+          </div>
+        </div>
+        {% for item in author.picture %}
+        {% if forloop.counter == 1 %}
+        <div class="row probootstrap-gutter16">
+          <div
+            class="col-md-4 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+        {% elif forloop.counter == 2 %}
+          <div
+            class="col-md-8 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% elif forloop.counter == 3 %}
+        <div class="row probootstrap-gutter16">
+          <div
+            class="col-md-5 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+          {% elif forloop.counter == 4 %}
+          <div
+            class="col-md-3 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+          {% elif forloop.counter == 5 %}
+          <div
+            class="col-md-4 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% elif forloop.counter == 6 %}
+        <div class="row probootstrap-gutter16">
+          <div
+            class="col-md-4 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+          {% elif forloop.counter == 7 %}
+          <div
+            class="col-md-4 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+          {% else %}
+          <div
+            class="col-md-4 probootstrap-animate fadeInUp probootstrap-animated probootstrap-animated fadeIn probootstrap-animated"
+            data-animate-effect="fadeIn">
+            <a href="#" class="img-bg" style="background-image: url({{ item.image.url }});">
+              <div class="probootstrap-photo-details">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.subtitle }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+    <div class="row" style="background-color:rgba(33, 33, 33, 1);">
+      <div class="col-md-6 col-md-offset-3 mb80 text-center probootstrap-animate fadeInUp probootstrap-animated">
+        <h2>Personal Honor</h2>
+      </div>
+    </div>
+
+    <div class="row" style="background-color:rgba(33, 33, 33, 1);padding:0 5% 0 5% ;">
+      {% for item in author.honor %}
+      <div class="col-md-10">
+        <div class="service left-icon probootstrap-animate fadeInUp probootstrap-animated">
+
+          <div class="icon">
+            <i class="icon-anchor"></i>
+          </div>
+          <div class="text">
+            <h3 class="heading">{{ item.name }}</h3>
+            <p>{{ item.content }}</p>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+  <script src="{% static 'js/smoothscroll.js' %}"></script>
+
+  <script src="{% static 'js/modernizr.custom.js' %}"></script>
+  <!--<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>-->
+
+</body>
+
+</html>

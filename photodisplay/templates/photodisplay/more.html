@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+{% load static %}
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Photography</title>
+	<meta name="description"
+		content="A photography-inspired website layout with an expanding stack slider and a background image tilt effect" />
+	<meta name="keywords"
+		content="photography, template, layout, effect, expand, image stack, animation, flickity, tilt" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/flickity.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+	
+</head>
+
+<body>
+	<div class="hero">
+		<div class="hero__back hero__back--static"></div>
+		<div class="hero__back hero__back--mover"></div>
+		<div class="hero__front"></div>
+	</div>
+	<div class="_container">
+
+		<header class="codrops-header">
+			<div class="codrops-links">
+                    <a class="codrops-icon codrops-icon--drop" href="/"
+					title="Back to the article"><span>主页</span></a>
+				<a class="codrops-icon codrops-icon--next" href="/"
+					title="Previous Demo"><span></span></a>
+			</div>
+			<h1 class="codrops-title">Eric <span>More</span></h1>
+			<nav class="menu">
+                    <a class="menu__item" href="{% url 'home' %}""><span>Home</span></a>
+                <a class="menu__item" href="{% url 'index' %}""><span>Photograph</span></a>
+				<a class="menu__item" href="{% url 'about' %}""><span>About</span></a>
+				
+			
+			</nav>
+		</header>
+
+
+
+
+<div class="wrap" id="wrap">
+    <!--负责平移、旋转--> 
+    
+        
+
+    {% for picture in picture_list %}
+
+    <div class="photo rotate-front" onclick="turn(this)" ;="" id="photo{{ forloop.counter| add:"-1" }}"
+        style="transform: rotate({{ -24 | add:forloop.counter | add:forloop.counter | add:forloop.counter }}deg) scale(0.8) translate({% if forloop.counter|divisibleby:2 %}600{% else %}-600{% endif %}px);">
+        <!--负责翻转-->
+        <div class="photo-wrap">
+            <div class="side side-front">
+                <p class="image"><img src="{{ picture.image.url }}"></p>
+                <p class="caption">{{ picture.name }}</p>
+            </div>
+            <div class="side side-back">
+                <div class="desc">
+                        {{ picture.content }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="nav">
+            {% if page_obj %}
+            {% if page_obj.has_previous %}
+            <i><a href="?page={{ page_obj.previous_page_number}}" >&lt</a></i>
+            {% endif %}
+            {% endif %}
+
+            {% for picture in picture_list %}<span id="nav{{ forloop.counter| add:"-1" }}" onclick="turn( g('#photo{{ forloop.counter| add:"-1" }}') )" class="i"></span>{% endfor %}
+            {% if page_obj %}
+            {% if page_obj.has_next %}
+            <i><a href="#">&gt</a></i>
+            {% endif %}
+            {% endif %}
+        </div>
+</div>
+<script src="{% static 'js/more.js' %}"></script>
+<script src="{% static 'images/data.js' %}"></script>
+</div>
+</body>
+</html>

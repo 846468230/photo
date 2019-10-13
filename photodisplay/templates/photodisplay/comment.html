@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Photography</title>
+    <meta name="description"
+        content="A photography-inspired website layout with an expanding stack slider and a background image tilt effect" />
+    <meta name="keywords"
+        content="photography, template, layout, effect, expand, image stack, animation, flickity, tilt" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flickity.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/templatemo-style.css'%}" />
+</head>
+
+<body>
+    <div class="hero">
+        <div class="hero__back hero__back--static"></div>
+        <div class="hero__back hero__back--mover"></div>
+        <div class="hero__front"></div>
+    </div>
+    <div class="_container" style="color:white">
+
+        <header class="codrops-header">
+            <div class="codrops-links">
+                    <a class="codrops-icon codrops-icon--drop" href="/"
+					title="Back to the article"><span>主页</span></a>
+				<a class="codrops-icon codrops-icon--next" href="/"
+					title="Previous Demo"><span></span></a>
+            </div>
+            <h1 class="codrops-title">Eric <span>Comment </span></h1>
+            <nav class="menu">
+                    <a class="menu__item" href="{% url 'home' %}""><span>Home</span></a>
+                    <a class="menu__item" href="{% url 'index' %}""><span>Photograph</span></a>
+                    <a class="menu__item" href="{% url 'about' %}""><span>About</span></a>
+                 </nav>
+        </header>
+        <div class="tm-content" >
+            <form class="tm-contact-form" action="/comment_result/" method="POST">
+        {% csrf_token %}
+        <input name="target" type="hidden" value="{{ target }}"/>
+        {% for field in comment_form %}
+        <div class="form-group">
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary rounded-0">
+                        Submit
+                    </button>
+        </div>
+    </form>
+            <!--<form action="" method="POST" class="tm-contact-form">
+                <div class="form-group">
+                    <input type="text" id="contact_name" name="contact_name" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" placeholder="昵称" required="">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="contact_email" name="contact_email" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" placeholder="Email" required="">
+                </div>
+    
+                <div class="form-group">
+                    <textarea rows="6" id="contact_message" name="contact_message" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" placeholder="内容" required="" style="margin-top: 0px; margin-bottom: 0px; height: 182px;"></textarea>
+                </div>
+    
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary rounded-0">
+                        Submit
+                    </button>
+                </div>
+            </form>-->
+        </div>
+
+   
+    </div>
+
+    <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/smoothscroll.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script> -->
+</body>
+
+</html>

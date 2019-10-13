@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+{% load static %}
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Photography</title>
+	<meta name="description"
+		content="A photography-inspired website layout with an expanding stack slider and a background image tilt effect" />
+	<meta name="keywords"
+		content="photography, template, layout, effect, expand, image stack, animation, flickity, tilt" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/flickity.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+
+	<script src="{% static 'js/modernizr.custom.js' %}"></script>
+</head>
+
+<body>
+	<div class="hero">
+		<div class="hero__back hero__back--static"></div>
+		<div class="hero__back hero__back--mover"></div>
+		<div class="hero__front"></div>
+	</div>
+	<div class="_container">
+
+		<header class="codrops-header">
+			<div class="codrops-links">
+				
+				<a class="codrops-icon codrops-icon--drop" href="/"
+					title="Back to the article"><span>主页</span></a>
+				<a class="codrops-icon codrops-icon--next" href="/"
+					title="Previous Demo"><span></span></a>
+			</div>
+			<h1 class="codrops-title">Eric <span>Photography</span></h1>
+			<nav class="menu">
+				<a class="menu__item" href="{% url 'home' %}""><span>Home</span></a>
+						<a class="menu__item menu__item--current" href="#"><span>Photograph</span></a>	
+				<a class="menu__item" href="{% url 'about' %}"><span>About</span></a>
+				
+			
+			</nav>
+		</header>
+
+		<div class="stack-slider">
+			<div class="stacks-wrapper">
+				
+					
+				{% for category in category_list %}	
+				<div class="stack">
+					<h2 class="stack-title"><a href="#" data-text="{{ category.name }}"><span>{{ category.name }}</span></a></h2>
+					{% for picture in category.pictures %}
+					<div class="item">
+							<div class="item__content">
+									<div class="comment">
+										<div class="item_details">
+									<ul>
+										<li><h2 style="text-align: center;color: white"></h2></li>
+										<li>
+											<div class="comment-container">
+												
+												<div class="comment-content">
+													{% for comment in picture.comments %}
+													<div class="single-reply">
+														<a>{{ comment.nickname }}</a>
+														<span>{{ comment.content}} </span>
+													</div>
+													{% endfor %}
+												</div>
+											</div>
+										</li>
+											<li>	
+												<div class="sub-comment" >
+													<a href="{% url 'comment' picture.id %}" ><button class="btn btn-skin">我要评论</button></a>
+												</div>
+											</li>
+									</ul>
+								</div>
+											
+					
+										
+								
+	
+									</div>
+								<div class="pic">
+									<img src="{{ picture.image.url }}" alt="img01" />
+									<div class="pic-intro">
+										<div class="intro-text">
+											<div class="text-inner">
+													{{ picture.content }}
+											</div>
+										</div>
+									</div>
+	
+								</div>
+	
+								<h3 class="item_title">{{ picture.name }}<span class="item__date">{{ picture.created_time }}</span>
+								</h3>
+								<div class="item_details">
+									<ul>
+									<li><i class="icon icon-camera"></i><span>{{ picture.camera }}</span></li>
+									<li><i class="icon icon-focal_length"></i><span>{{ picture.focus }}</span></li>
+									<li><i class="icon icon-aperture"></i><span>&fnof;{{ picture.aperture }}</span></li>
+									<li><i class="icon icon-exposure_time"></i><span>{{ picture.shutter_time }}</span></li>
+									<li><i class="icon icon-iso"></i><span>{{ picture.sensitive }}</span></li>
+								</ul>
+	
+									<!-- <button id ="btn-1" type="button" onclick="comment_show()">展开评论</button> -->
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						
+					<a href="{% url 'more' category.id %}"><button class="btn btn-skin">More</button></a>						
+				</div>
+				
+				{% endfor %}
+			</div>
+			<!-- /stacks-wrapper -->
+		</div>
+		<!-- /stacks -->
+		<img class="loader" src="{% static 'img/three-dots.svg' %}" width="60" alt="Loader image" />
+	</div>
+	<!-- /container -->
+	<script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+	<script src="{% static 'js/smoothscroll.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<!-- <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script> -->
+</body>
+
+</html>
